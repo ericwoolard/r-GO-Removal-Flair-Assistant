@@ -12,6 +12,7 @@ removal reason, as well as adding a quick flair menu to flair posts in a single 
 
 By default, when choosing a rule under the 'Remove w/ Reason' dropdown, it will open a modal window with the default text for 
 that rule (configured in the extension options) and allow you to add any custom text before removing the thread. [(Example)](https://i.imgur.com/LAvuDVs.png)
+
 You can also configure a custom footer through the extension options which will automatically be added as a footer to every 
 removal reason you leave. This is a good place to add a generic "If you have any further questions or concerns, please send us a modmail!"
 
