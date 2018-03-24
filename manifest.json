@@ -1,57 +1,57 @@
 {
-	"manifest_version": 2,
+    "manifest_version": 2,
 
-	"name": "/r/GlobalOffensive Removal Assistant",
-	"short_name": "/r/GO Removal Assistant",
-	"author": "Jpon9 & zebradolphin5",
-	"description": "Tired of removing stuff without giving the user notice?",
-	"version": "0.2.0",
+    "name": "/r/GlobalOffensive Removal Assistant",
+    "short_name": "/r/GO Removal Assistant",
+    "author": "Jpon9 & zebradolphin5",
+    "description": "Tired of removing stuff without giving the user notice?",
+    "version": "0.2.0",
 
-	"content_scripts": [
-		{
-			"matches": [
-				"*://*.reddit.com/r/GlobalOffensive",
-				"*://*.reddit.com/r/GlobalOffensive/*",
-				"*://*.reddit.com/r/globaloffensive",
-				"*://*.reddit.com/r/globaloffensive/*",
-				"*://*.reddit.com/r/mod/*"
-			],
-			"js": [
-				"jquery-2.1.4.min.js",
-				"jquery-ui.min.js",
-				"main.js"
-			],
-			"css": [
-				"jquery-ui.min.css",
-				"jquery-ui.structure.min.css",
-				"jquery-ui.theme.min.css",
-				"style.css"
-			]
-		}
-	],
-	"options_ui": {
-		"page": "options.html",
-		"chrome_style": true
-	},
-	
-	"icons": { 
-		"16": "icon16.png",
+    "content_scripts": [
+        {
+            "matches": [
+                "*://*.reddit.com/r/GlobalOffensive",
+                "*://*.reddit.com/r/GlobalOffensive/*",
+                "*://*.reddit.com/r/globaloffensive",
+                "*://*.reddit.com/r/globaloffensive/*",
+                "*://*.reddit.com/r/mod/*"
+            ],
+            "js": [
+                "jquery-2.1.4.min.js",
+                "jquery-ui.min.js",
+                "main.js"
+            ],
+            "css": [
+                "jquery-ui.min.css",
+                "jquery-ui.structure.min.css",
+                "jquery-ui.theme.min.css",
+                "style.css"
+            ]
+        }
+    ],
+    "options_ui": {
+        "page": "options.html",
+        "chrome_style": true
+    },
+    
+    "icons": { 
+        "16": "icon16.png",
         "48": "icon48.png",
         "128": "icon128.png" 
-	},
+    },
 
-	"browser_action": {
-		"default_icon": "icon.png",
-		"default_popup": "popup.html"
-	},
+    "browser_action": {
+        "default_icon": "icon.png",
+        "default_popup": "popup.html"
+    },
 
-	"permissions": [
-		"activeTab",
-		"storage",
-		"*://*.reddit.com/r/GlobalOffensive",
-		"*://*.reddit.com/r/GlobalOffensive/*",
-		"*://*.reddit.com/r/globaloffensive",
-		"*://*.reddit.com/r/globaloffensive/*",
-		"*://*.reddit.com/r/mod/*"
-	]
+    "permissions": [
+        "activeTab",
+        "storage",
+        "*://*.reddit.com/r/GlobalOffensive",
+        "*://*.reddit.com/r/GlobalOffensive/*",
+        "*://*.reddit.com/r/globaloffensive",
+        "*://*.reddit.com/r/globaloffensive/*",
+        "*://*.reddit.com/r/mod/*"
+    ]
 }
