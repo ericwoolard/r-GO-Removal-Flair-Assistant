@@ -184,7 +184,7 @@ function addRemoveWithReasons() {
                 ev.preventDefault();
                 var id = $(ev.target).closest('.thing').attr('data-fullname');
                 // If ctrl key is pressed when a rule is clicked with
-                //  OneTap mode enabled, open a custom removal dialog.
+                // OneTap mode enabled, open a custom removal dialog.
                 if (ev.ctrlKey) {
                     chrome.storage.sync.get(chromeGet, function(storage) {
                         if (storage.oneTaps) {
