@@ -1,0 +1,15 @@
+/* jquery-ui */
+.ui-widget-overlay {
+    filter: unset;
+    opacity: unset;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.ui-widget-content {
+    background-color: #202020;
+}
+
+#ruleText {
+    background-color: #373737;
+    color: #CCCCCC;
+}
