@@ -41,6 +41,36 @@ function removeWithReason(thing, reason, distinguish, win) {
     });
 }
 
+function checkNightMode() {
+    function doModeLogic() {
+        if($('body').hasClass('res-nightmode')) {
+            // Stop if we've already added the stylesheet
+            if($('link#rgo_nightmode').length) { return; }
+
+            $('<link/>', {
+                rel: 'stylesheet',
+                type: 'text/css',
+                href: chrome.runtime.getURL('style_nightmode_overrides.css'),
+                id: 'rgo_nightmode'
+            }).appendTo('head');
+        } else {
+            $('link#rgo_nightmode').remove();
+        }
+    }
+
+    // hook changes to body's classes to handle night mode changes
+    var observer = new MutationObserver(function(mutations) {
+        doModeLogic();
+    });
+    observer.observe(document.body, {
+        attributes: true,
+        attributeFilter: ['class']
+    });
+
+    // invoke nightmode logic once to process current state
+    doModeLogic();
+}
+
 function addQuickFlair() {
     // Add our special button to all flatlists under threads
     $('.link .flat-list.buttons').each(function (i, e) {
@@ -115,7 +145,7 @@ function addQuickFlair() {
 
             flairChoices.appendChild(linkFlair);
         }
-        
+
         var li = document.createElement('LI');
         var spacer = document.createElement('DIV');
         spacer.className = 'spacer';
@@ -170,7 +200,7 @@ function addRemoveWithReasons() {
             'Rule 6: Scamming': 'Scamming & Cheating',
             'Rule 7: Witch-hunts': 'Accusations & Witch-hunts',
             'Rule 8: Advertising': 'Advertising',
-            'Rule 9: Abuse': 'Abuse & Poor Behavior'
+            'Rule 9: Abuse': 'Abuse & Poor Behavior' // now using the incorrect spelling of behaviour
         };
 
         for (var r in rules) {
@@ -320,6 +350,7 @@ $(window).on('neverEndingLoad', function () {
     addRemoveWithReasons();
 });
 $(document).ready(function () {
+    checkNightMode();
     addQuickFlair();
     addRemoveWithReasons();
 });

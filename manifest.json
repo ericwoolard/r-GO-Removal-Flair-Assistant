@@ -53,5 +53,9 @@
         "*://*.reddit.com/r/globaloffensive",
         "*://*.reddit.com/r/globaloffensive/*",
         "*://*.reddit.com/r/mod/*"
+    ],
+    
+    "web_accessible_resources": [
+        "style_nightmode_overrides.css"
     ]
 }
