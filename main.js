@@ -194,6 +194,7 @@ function addRemoveWithReasons() {
         var rules = {
             'Rule 1: Relevancy': 'Relevancy',
             'Rule 2: Quality': 'Quality',
+            'Rule 2b: Duplicate': 'Duplicate',
             'Rule 3: Support': 'Support',
             'Rule 4: Exploits': 'Exploits & Bugs',
             'Rule 5: Trading': 'Trading, Betting & Giveaways',
@@ -255,6 +256,7 @@ function addRemoveWithReasons() {
                     var chromeGet = {
                         rule1: "Your thread was removed under **[Rule 1](https://www.reddit.com/r/GlobalOffensive/about/rules/)**.",
                         rule2: "Your thread was removed under **[Rule 2](https://www.reddit.com/r/GlobalOffensive/about/rules/)**.",
+                        rule2b: "Your thread was removed as a duplicate under **[Rule 2](https://www.reddit.com/r/GlobalOffensive/about/rules/)**.",
                         rule3: "Your thread was removed under **[Rule 3](https://www.reddit.com/r/GlobalOffensive/about/rules/)**.",
                         rule4: "Your thread was removed under **[Rule 4](https://www.reddit.com/r/GlobalOffensive/about/rules/)**.",
                         rule5: "Your thread was removed under **[Rule 5](https://www.reddit.com/r/GlobalOffensive/about/rules/)**.",

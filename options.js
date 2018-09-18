@@ -2,6 +2,7 @@
 function save_options() {
     var rule1   = document.getElementById('rule1').value;
     var rule2   = document.getElementById('rule2').value;
+    var rule2b  = document.getElementById('rule2b').value;
     var rule3   = document.getElementById('rule3').value;
     var rule4   = document.getElementById('rule4').value;
     var rule5   = document.getElementById('rule5').value;
@@ -14,6 +15,7 @@ function save_options() {
     chrome.storage.sync.set({
         rule1: rule1,
         rule2: rule2,
+        rule2b: rule2b,
         rule3: rule3,
         rule4: rule4,
         rule5: rule5,
@@ -40,6 +42,7 @@ function restore_options() {
     chrome.storage.sync.get({
         rule1: "Your thread was removed under **[Rule 1](https://www.reddit.com/r/GlobalOffensive/about/rules/)**.",
         rule2: "Your thread was removed under **[Rule 2](https://www.reddit.com/r/GlobalOffensive/about/rules/)**.",
+        rule2b: "Your thread was removed as a duplicate under **[Rule 2](https://www.reddit.com/r/GlobalOffensive/about/rules/)**.",
         rule3: "Your thread was removed under **[Rule 3](https://www.reddit.com/r/GlobalOffensive/about/rules/)**.",
         rule4: "Your thread was removed under **[Rule 4](https://www.reddit.com/r/GlobalOffensive/about/rules/)**.",
         rule5: "Your thread was removed under **[Rule 5](https://www.reddit.com/r/GlobalOffensive/about/rules/)**.",
@@ -52,6 +55,7 @@ function restore_options() {
     }, function(storage) {
         document.getElementById('rule1').value     = storage.rule1;
         document.getElementById('rule2').value     = storage.rule2;
+        document.getElementById('rule2b').value    = storage.rule2b;
         document.getElementById('rule3').value     = storage.rule3;
         document.getElementById('rule4').value     = storage.rule4;
         document.getElementById('rule5').value     = storage.rule5;
