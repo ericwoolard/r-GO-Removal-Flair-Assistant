@@ -3,3 +3,5 @@ external/
 
 # Ignore screenshots
 screenshots/
+
+*.zip
