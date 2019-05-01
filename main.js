@@ -1,73 +1,6 @@
 // Necessary to perform any API actions
 var modhash = $("form.logout input[name=uh]").val();
 
-function editFlair(thing, flairCss, flairText) {
-    var flairTemplates = {
-        'ama': 'b385ab06-422d-11e5-9cdb-0e49b4de90e1',
-        'discussion': 'a053fda8-422d-11e5-b461-0e184320b869',
-        'discussion esports': 'af5b57fc-374a-11e6-abd9-0e7c62f92521',
-        'feedback': '7dd1bf36-422d-11e5-aa4f-0e5ca32a3025',
-        'fluff': '70a869f4-422d-11e5-9246-0ee61c357d3b',
-        'fluff esports': '98eaa356-374a-11e6-8499-0ed34ee2f5e7',
-        'gameplay': '494583ba-422d-11e5-aa5e-0e49b4de90e1',
-        'gameplay esports': '7d39883e-374a-11e6-bcef-0ee62a832d0b',
-        'gameplay highlight': 'ab2bc63c-3d3d-11e6-b770-0ed21bc28d05',
-        'gameplay highlight esports': 'dbaf9fd0-2af5-11e7-a375-0e70f163db0e',
-        'guides': 'aab0ede2-422d-11e5-9818-0e1fa8047017',
-        'help': 'afcf8cac-422d-11e5-b01d-0e3f27028b2f',
-        'news': '8d3ceec8-422d-11e5-a7ec-0e8ad82823eb',
-        'news esports': 'a3172a70-374a-11e6-8317-0edda3eec021',
-        'sticky': 'bbfa00b6-422d-11e5-b9c0-0e707a1ba6df',
-        'ugc': '856065a4-422d-11e5-a73c-0e707a1ba6df',
-        'update': '9a40fd26-422d-11e5-b1eb-0e5e20c89e15'
-    };
-    
-    $.post('https://www.reddit.com/r/globaloffensive/api/selectflair', {
-        api_type: 'json',
-        flair_template_id: flairTemplates[flairCss],
-        link: thing,
-        text: flairText,
-        uh: modhash
-    }).done(function() {
-        var fullID = "#thing" + thing;
-        var flairPlacement = fullID + " .entry .top-matter p.title";
-        console.log(flairPlacement);
-        var flairSpan = document.createElement('span');
-        flairSpan.className = 'linkflairlabel';
-        flairSpan.setAttribute('title', flairText);
-        $(flairSpan).text(flairText);
-        console.log(flairSpan);
-        $(flairSpan).appendTo(flairPlacement);
-    });
-}
-
-function removeWithReason(thing, reason, distinguish, win) {
-    $.post('https://www.reddit.com/r/globaloffensive/api/remove', {
-        uh: modhash,
-        id: thing,
-        spam: false,
-    }).done(function() {
-        $.post('https://www.reddit.com/r/globaloffensive/api/comment', {
-            parent: thing,
-            text: reason,
-            uh: modhash,
-            api_type: 'json'
-        }).done(function(res) {
-            if (distinguish && res.json.hasOwnProperty("errors") && res.json.errors.length == 0) {
-                $.post('https://www.reddit.com/r/globaloffensive/api/distinguish/yes', {
-                    id: res.json.data.things[0].data.id,
-                    uh: modhash,
-                    sticky: true
-                }).done(function() {
-                    if ( win ) {
-                        $( win ).dialog('close');
-                    }
-                });
-            }
-        });
-    });
-}
-
 function checkNightMode() {
     function doModeLogic() {
         if($('body').hasClass('res-nightmode')) {
@@ -163,7 +96,14 @@ function addQuickFlair() {
                 if (flairText === 'UGC') {
                     flairText = 'User Generated Content';
                 }
-                editFlair(id, flairClicked, flairText);
+                chrome.runtime.sendMessage({
+                    contentScriptQuery: 'editFlair', 
+                    thing: id,
+                    flairCSS: flairClicked,
+                    text: flairText,
+                    mod: modhash
+                });
+                //editFlair(id, flairClicked, flairText);
                 
                 var dd = $(ev.target.parentNode).siblings('.rgo-qf-dropdown');
                 dd.html('flaired!');
@@ -228,7 +168,7 @@ function addRemoveWithReasons() {
             'Rule 6: Scamming': 'Scamming & Cheating',
             'Rule 7: Witch-hunts': 'Accusations & Witch-hunts',
             'Rule 8: Advertising': 'Advertising',
-            'Rule 9: Abuse': 'Abuse & Poor Behavior' // now using the incorrect spelling of behaviour
+            'Rule 9: Abuse': 'Abuse & Poor Behavior'
         };
 
         for (var r in rules) {
@@ -260,10 +200,20 @@ function addRemoveWithReasons() {
 
                                         if (storage.footer != '') {
                                             footer = "\n\n---\n\n" + storage.footer.replace('%%thread_link%%', removedThreadLink);
+                                            removalMessage += footer;
                                         }
 
                                         // This actually makes the POSTs happen and removes the thread, it also closes the dialog on completion
-                                        removeWithReason(id, removalMessage + footer, true, this);
+                                        chrome.runtime.sendMessage({
+                                            contentScriptQuery: 'removeWithReason', 
+                                            thing: id,
+                                            text: removalMessage,
+                                            distinguish: true,
+                                            win: this,
+                                            mod: modhash
+                                        });
+                                        //$( this ).dialog('close');
+                                        //removeWithReason(id, removalMessage, distinguish = true, win = this);
 
                                         var dd = $(ev.target.parentNode).siblings('.rgo-dropdown');
                                         dd.html('removed');
@@ -311,9 +261,18 @@ function addRemoveWithReasons() {
 
                             if (storage.footer != "") {
                                 footer = "\n\n---\n\n" + storage.footer.replace('%%thread_link%%', removedThreadLink);
+                                removalMessage += footer;
                             }
 
-                            removeWithReason(id, removalMessage + footer, true, null);
+                            chrome.runtime.sendMessage({
+                                contentScriptQuery: 'removeWithReason', 
+                                thing: id,
+                                text: removalMessage,
+                                distinguish: true,
+                                win: null,
+                                mod: modhash
+                            });
+                            //removeWithReason(id, removalMessage, distinguish = true, win = null);
                             var dd = $(ev.target.parentNode).siblings('.rgo-dropdown');
                             dd.html("removed");
                             dd.removeClass('rgo-dropdown');
@@ -342,10 +301,20 @@ function addRemoveWithReasons() {
 
                                         if (storage.footer != "") {
                                             footer = "\n\n---\n\n" + storage.footer.replace('%%thread_link%%', removedThreadLink);
+                                            removalMessage += footer;
                                         }
 
                                         // This actually makes the POSTs happen and removes the thread, it also closes the dialog on completion
-                                        removeWithReason(id, removalMessage + footer, true, this);
+                                        chrome.runtime.sendMessage({
+                                            contentScriptQuery: 'removeWithReason', 
+                                            thing: id,
+                                            text: removalMessage,
+                                            distinguish: true,
+                                            win: this,
+                                            mod: modhash
+                                        });
+                                        //$( this ).dialog('close');
+                                        //removeWithReason(id, removalMessage, distinguish = true, win = this);
 
                                         var dd = $(ev.target.parentNode).siblings('.rgo-dropdown');
                                         dd.html("removed");
@@ -372,6 +341,19 @@ function addRemoveWithReasons() {
         e.appendChild(li);
     });
 }
+
+// Listener for displaying responses or errors from our background scripts
+chrome.runtime.onMessage.addListener(
+    function(request, sender) {
+        if (request.status === 'error') {
+            alert('Error: ' + request.msg);
+            $("#ruleDialog").dialog('close');
+        }
+        if (request.status === 'success') {
+            $("#ruleDialog").dialog('close');
+        }
+    }
+);
 
 // Hook our functions
 $(window).on('neverEndingLoad', function () {
