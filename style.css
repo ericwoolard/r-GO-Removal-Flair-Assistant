@@ -5,6 +5,7 @@
 .entry .dropdown.lightdrop.rgo-dropdown:hover + .drop-choices,
 .entry .dropdown.lightdrop.rgo-dropdown + .drop-choices:hover {
     display: inherit;
+    line-height: unset;
 }
 
 .entry .dropdown.lightdrop.rgo-dropdown + .drop-choices {
@@ -19,6 +20,7 @@
 .entry .dropdown.lightdrop.rgo-qf-dropdown:hover + .drop-choices,
 .entry .dropdown.lightdrop.rgo-qf-dropdown + .drop-choices:hover {
     display: inherit;
+    line-height: unset;
 }
 
 .entry .dropdown.lightdrop.rgo-qf-dropdown + .drop-choices {
