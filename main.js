@@ -69,7 +69,8 @@ function addQuickFlair() {
             'Stream Highlight': 'gameplay highlight',
             'Stream Highlight | Esports': 'gameplay highlight esports',
             'Tips/Guides': 'guides',
-            'UGC': 'ugc'
+            'UGC': 'ugc',
+            'Workshop Skin': 'workshop skin'
         };
 
         for (var lf in linkFlairs) {

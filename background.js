@@ -18,7 +18,8 @@ chrome.runtime.onMessage.addListener(
                 'news esports': 'a3172a70-374a-11e6-8317-0edda3eec021',
                 'sticky': 'bbfa00b6-422d-11e5-b9c0-0e707a1ba6df',
                 'ugc': '856065a4-422d-11e5-a73c-0e707a1ba6df',
-                'update': '9a40fd26-422d-11e5-b1eb-0e5e20c89e15'
+                'update': '9a40fd26-422d-11e5-b1eb-0e5e20c89e15',
+                'workshop skin': 'be3c0bde-cc62-11ea-b316-0eb8e0b23e13'
             };
 
             const url = new URL('https://www.reddit.com/r/globaloffensive/api/selectflair');
