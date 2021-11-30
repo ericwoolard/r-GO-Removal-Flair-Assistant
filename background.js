@@ -10,8 +10,6 @@ chrome.runtime.onMessage.addListener(
                 'fluff esports': '98eaa356-374a-11e6-8499-0ed34ee2f5e7',
                 'gameplay': '494583ba-422d-11e5-aa5e-0e49b4de90e1',
                 'gameplay esports': '7d39883e-374a-11e6-bcef-0ee62a832d0b',
-                'gameplay highlight': 'ab2bc63c-3d3d-11e6-b770-0ed21bc28d05',
-                'gameplay highlight esports': 'dbaf9fd0-2af5-11e7-a375-0e70f163db0e',
                 'guides': 'aab0ede2-422d-11e5-9818-0e1fa8047017',
                 'help': 'afcf8cac-422d-11e5-b01d-0e3f27028b2f',
                 'news': '8d3ceec8-422d-11e5-a7ec-0e8ad82823eb',
