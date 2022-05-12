@@ -66,8 +66,6 @@ function addQuickFlair() {
             'News/Events': 'news',
             'News/Events | Esports': 'news esports',
             'Scheduled Sticky': 'sticky',
-            'Stream Highlight': 'gameplay highlight',
-            'Stream Highlight | Esports': 'gameplay highlight esports',
             'Tips/Guides': 'guides',
             'UGC': 'ugc',
             'Workshop Skin': 'workshop skin'

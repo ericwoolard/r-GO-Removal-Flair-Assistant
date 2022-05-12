@@ -5,7 +5,7 @@
     "short_name": "/r/GO Removal Assistant",
     "author": "Jpon9 & zebradolphin5",
     "description": "Tired of removing stuff without giving the user notice?",
-    "version": "1.1.0",
+    "version": "1.2.0",
 
     "content_scripts": [
         {
